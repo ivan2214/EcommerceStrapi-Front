@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <main className='min-h-screen w-full bg-slate-100 text-gray-900'>
       <Slider />
-      <Destacados />
+     {/*  <Destacados /> */}
       <Categories />
       <Marcas />
     </main>
