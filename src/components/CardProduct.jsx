@@ -6,13 +6,17 @@ const CardProduct = ({ title, description, price, image }) => {
   return (
     <article className='h-full min-h-[400px] w-96 max-w-xs rounded-md '>
       <div className='flex h-full flex-col  items-center  justify-between '>
-        <Link to={`/product/${'1' || id}`} className='h-full max-h-[100px]  min-h-[100px] w-full'>
-          <img className='h-full w-full rounded-md object-cover' src={img} alt='' />
+        <Link to={`/product/${'1' || id}`} className=' w-full'>
+          <img
+            className='h-[150px] max-h-[150px]  min-h-[100px] w-full rounded-md object-cover'
+            src={img}
+            alt=''
+          />
         </Link>
         <div className='flex h-full w-full  flex-col items-center justify-between gap-10 rounded-md  p-5 shadow-lg'>
           <div className='flex  h-full w-full flex-col items-start justify-between gap-5'>
-            <h3 className='text-lg font-bold capitalize'>{title}</h3>
-            <p className='py-5 text-sm font-light'>
+            <h3 className='text-lg font-bold capitalize text-blue-600'>{title}</h3>
+            <p className='py-5 text-base font-light text-left'>
               {description.length > 150 ? description.slice(0, 150) + '...' : description}
             </p>
             <span>{price}</span>
