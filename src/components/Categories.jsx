@@ -1,7 +1,10 @@
 import React from 'react'
 import CardCategory from '@/components/CardCategory'
+import categoriesSlice from '@/redux/slices/categories/categoriesSlice'
+import { useSelector } from 'react-redux'
 
 const Categories = () => {
+  const { categories } = useSelector((s) => s.categories)
   return (
     <section className='mx-auto flex h-full w-full max-w-6xl flex-col gap-10 py-5'>
       <h2 className='text-left text-3xl font-bold '>¿Qué estás buscando?</h2>
@@ -9,16 +12,10 @@ const Categories = () => {
         {/* {Categories?.map((c) => {
           return <CardCategory />
         })} */}
-        <CardCategory />
-        <CardCategory />
-        <CardCategory />
-        <CardCategory />
-        <CardCategory />
-        <CardCategory />
-        <CardCategory />
-        <CardCategory />
-        <CardCategory />
-        <CardCategory />
+
+        {categories.map((c) => {
+          return <CardCategory name={c?.attributes?.name} logo={c.attributes.name} />
+        })}
       </section>
     </section>
   )

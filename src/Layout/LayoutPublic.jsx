@@ -1,6 +1,17 @@
 import { Outlet } from 'react-router-dom'
 import NavBar from '@/components/NavBar'
+import { useDispatch } from 'react-redux'
+import { getAllProductsAsync } from '@/redux/slices/products/thunk'
+import { useEffect } from 'react'
+import { getAllCategoriesAsync } from '@/redux/slices/categories/thunk'
+
 const LayoutPublic = () => {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getAllProductsAsync())
+    dispatch(getAllCategoriesAsync())
+  }, [dispatch])
   return (
     <div>
       <NavBar />

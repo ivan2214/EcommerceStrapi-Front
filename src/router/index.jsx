@@ -7,9 +7,11 @@ import ProtectedRoute from '@/pages/ProtectedRoute'
 import Account from '@/pages/Account'
 import Cart from '@/pages/Cart'
 import Login from '@/pages/Login'
+import ProductDetail from '@/pages/ProductDetail'
+import Favorite from '@/pages/Favorite'
 
 const user = {
-  autenticated: false,
+  autenticated: true,
   admin: false,
 }
 
@@ -28,6 +30,10 @@ export const router = createBrowserRouter([
         element: <Products />,
       },
       {
+        path: '/product/:id',
+        element: <ProductDetail />,
+      },
+      {
         path: '/cart',
         element: <Cart />,
       },
@@ -44,8 +50,17 @@ export const router = createBrowserRouter([
         path: '/login',
         errorElement: <NotFound />,
         element: (
-          <ProtectedRoute isAllowed={!user.autenticated} redirectTo={'/'}>
+          <ProtectedRoute isAllowed={user.autenticated} redirectTo={'/account'}>
             <Login />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/favorite',
+        errorElement: <NotFound />,
+        element: (
+          <ProtectedRoute isAllowed={user.autenticated} redirectTo={'/login'}>
+            <Favorite />
           </ProtectedRoute>
         ),
       },

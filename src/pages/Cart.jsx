@@ -1,7 +1,19 @@
 import React from 'react'
+import ProductsCart from '@/components/ProductsCart'
+
+import { useSelector } from 'react-redux'
+
+import { ToastContainer } from 'react-toastify'
 
 const Cart = () => {
-  return <div className='min-h-screen w-full bg-gray-900 text-white'>Cart</div>
+  return (
+    <main className='mx-auto min-h-screen w-full max-w-7xl bg-slate-100 text-gray-900'>
+      <section className='flex flex-col justify-center gap-10'>
+        <ProductsCart />
+        <ToastContainer theme='light' />
+      </section>
+    </main>
+  )
 }
 
 export default Cart

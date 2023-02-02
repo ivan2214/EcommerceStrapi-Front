@@ -12,11 +12,12 @@ import { persistStore } from 'redux-persist'
 const persistor = persistStore(store)
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <Provider store={store}>
-    <PersistGate persistor={persistor}>
+  <PersistGate persistor={persistor}>
+    <Provider store={store}>
       <RouterProvider router={router}>
         <Outlet />
       </RouterProvider>
-    </PersistGate>
-  </Provider>,
+    </Provider>
+    ,
+  </PersistGate>,
 )

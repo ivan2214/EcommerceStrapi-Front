@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { BsArrowLeft, BsArrowRight } from 'react-icons/bs'
 
 const Slider = () => {
@@ -30,21 +30,21 @@ const Slider = () => {
     'https://www.fullh4rd.com.ar/adminrgb/img/banner/137.png',
     'https://www.fullh4rd.com.ar/adminrgb/img/banner/136.png',
   ]
-  console.log(images[imgIndex])
+
   return (
-    <section className='overflow-hidden relative flex min-h-[50vh] w-full flex-col  '>
+    <section className='relative  min-h-[50vh] w-full overflow-hidden  '>
       <img
         style={{ opacity: opacity, transform: `translateX(${translate})` }}
         src={images[imgIndex]}
-        className='mx-auto max-h-96    min-h-full min-w-full max-w-lg object-contain transition-all duration-500 ease-in-out lg:aspect-[16/16]'
+        className='m-auto max-h-96 lg:aspect-auto   min-h-full min-w-full max-w-lg object-contain transition-all duration-500 ease-in-out aspect-[16/16]'
         alt=''
       />
       <div className='absolute top-0   z-50 flex h-full w-full items-center justify-between '>
         <button onClick={prevImage}>
-          <BsArrowLeft className=' rounded-full bg-gray-300 mx-5  text-center text-2xl  text-gray-900' />
+          <BsArrowLeft className=' mx-5 rounded-full bg-gray-300  text-center text-2xl  text-gray-900' />
         </button>
         <button onClick={nextImage}>
-          <BsArrowRight className=' rounded-full bg-gray-300 mx-5  text-center text-2xl  text-gray-900' />
+          <BsArrowRight className=' mx-5 rounded-full bg-gray-300  text-center text-2xl  text-gray-900' />
         </button>
       </div>
     </section>
