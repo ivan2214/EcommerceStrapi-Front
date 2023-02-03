@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom'
 
 const Filters = () => {
   const { name, cat } = useParams()
-  console.log(name)
+
   const { categories } = useSelector((s) => s.categories)
   const { brands } = useSelector((s) => s.brands)
   const [order, setOrder] = useState('')

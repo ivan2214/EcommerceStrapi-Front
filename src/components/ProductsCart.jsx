@@ -35,7 +35,8 @@ const Cart = () => {
 
   const purchaseCart = async (cart) => {
     console.log(cart)
-    const url = 'http://localhost:1337/api/payments'
+    const url = 'https://ecommercestrapi-back-production.up.railway.app/api/payments'
+    /* const url = 'http://localhost:1337/api/payments' */
     const data = await axios.post(url, { cart })
     const { body } = data?.data
     console.log(body?.init_point)
@@ -84,7 +85,8 @@ const Cart = () => {
                     <img
                       className='
                       m-auto mr-5 w-[100px] max-w-full object-cover'
-                      src={`http://localhost:1337${cartItem?.attributes?.images.data[0].attributes.url}`}
+                      /* src={`http://localhost:1337${cartItem?.attributes?.images.data[0].attributes.url}`} */
+                      src={`https://ecommercestrapi-back-production.up.railway.app${cartItem?.attributes?.images.data[0].attributes.url}`}
                       alt={cartItem?.attributes?.title}
                     />
                     <div className='flex w-fit flex-col items-start  gap-5'>

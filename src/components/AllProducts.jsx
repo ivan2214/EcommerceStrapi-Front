@@ -16,7 +16,8 @@ const AllProducts = () => {
                   title={p?.attributes?.title}
                   description={p?.attributes?.description}
                   price={p?.attributes?.price}
-                  image={`http://localhost:1337${p?.attributes?.images?.data[0]?.attributes?.url} `}
+                  /* image={`http://localhost:1337${p?.attributes?.images?.data[0]?.attributes?.url} `} */
+                  image={`https://ecommercestrapi-back-production.up.railway.app${p?.attributes?.images?.data[0]?.attributes?.url} `}
                   id={p.id}
                 />
               )

@@ -15,7 +15,8 @@ const Marcas = () => {
                 key={id}
                 id={id}
                 name={attributes?.name}
-                logo={`http://localhost:1337${attributes?.logo?.data[0]?.attributes?.url} `}
+                /* logo={`http://localhost:1337${attributes?.logo?.data[0]?.attributes?.url} `} */
+                logo={`https://ecommercestrapi-back-production.up.railway.app${attributes?.logo?.data[0]?.attributes?.url} `}
               />
             )
           })

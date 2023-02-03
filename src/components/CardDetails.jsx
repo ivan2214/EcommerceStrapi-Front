@@ -17,7 +17,8 @@ const CartDetails = ({ id, data }) => {
             >
               <img
                 className=' w-full rounded-md object-cover'
-                src={`http://localhost:1337${i?.attributes?.url} `}
+                /* src={`http://localhost:1337${i?.attributes?.url} `} */
+                src={`https://ecommercestrapi-back-production.up.railway.app${i?.attributes?.url} `}
                 alt=''
               />
             </div>
@@ -27,7 +28,8 @@ const CartDetails = ({ id, data }) => {
       <section className='flex h-full min-h-[200px] w-full max-w-3xl rounded-md  '>
         <img
           className='  h-full  min-h-[100px] w-full rounded-md object-cover'
-          src={`http://localhost:1337${dataImage[0].attributes.url} `}
+          /* src={`http://localhost:1337${dataImage[0].attributes.url} `} */
+          src={`https://ecommercestrapi-back-production.up.railway.app${dataImage[0].attributes.url} `}
           alt={description}
         />
       </section>
