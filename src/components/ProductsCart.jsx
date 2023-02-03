@@ -44,10 +44,10 @@ const Cart = () => {
   }
 
   return (
-    <div className=' flex flex-col gap-10 px-8 py-16'>
+    <div className=' overflow-hidden lg:flex lg:flex-col lg:gap-10 lg:px-8 lg:py-16'>
       <h2 className='text-center text-4xl  font-bold text-blue-400'>Carrito de Compras</h2>
       {cart.cartItems.length === 0 ? (
-        <div className='cart-empty'>
+        <div className='p-5'>
           <p>Your cart is currently empty</p>
           <div className='start-shopping'>
             <Link to='/'>
@@ -69,30 +69,32 @@ const Cart = () => {
           </div>
         </div>
       ) : (
-        <div className=' flex flex-col gap-5'>
+        <div className=' lg:flex lg:flex-col lg:gap-5'>
           <div className='flex w-full  items-center justify-between gap-x-2'>
             <h3 className='text-lg font-bold  uppercase text-blue-400'>Productos</h3>
           </div>
 
-          <div className='flex flex-col  gap-10'>
+          <div className='flex flex-col lg:flex lg:flex-col  lg:gap-10'>
             {cart.cartItems &&
               cart.cartItems.map((cartItem) => (
                 <div
-                  className='flex items-center justify-between border-b-2 border-gray-400 py-5 '
+                  className='flex flex-col border-b-2 border-gray-400 lg:flex lg:items-center lg:justify-between lg:py-5 '
                   key={cartItem?.id}
                 >
-                  <div className='flex'>
+                  <div className='flex flex-col lg:flex-row'>
                     <img
                       className='
-                      m-auto mr-5 w-[100px] max-w-full object-cover'
+                      lg:m-auto lg:mr-5 lg:w-[100px] lg:max-w-full lg:object-cover'
                       /* src={`http://localhost:1337${cartItem?.attributes?.images.data[0].attributes.url}`} */
-                      src={`https://ecommercestrapi-back-production.up.railway.app${cartItem?.attributes?.images.data[0].attributes.url}`}
+                      src={`https://ecommercestrapi-back-production.up.railway.app${cartItem?.attributes?.images?.data[0]?.attributes?.url}`}
                       alt={cartItem?.attributes?.title}
                     />
-                    <div className='flex w-fit flex-col items-start  gap-5'>
-                      <h3 className='max-w-[200px] text-base '>{cartItem?.attributes?.title}</h3>
+                    <div className='flex flex-col lg:w-fit lg:flex-col lg:items-start  lg:gap-5'>
+                      <h3 className='lg:max-w-[200px] lg:text-base '>
+                        {cartItem?.attributes?.title}
+                      </h3>
                       <button
-                        className='rounded-full bg-gray-200 px-2 py-1'
+                        className='bg-gray-200 lg:rounded-full lg:px-2 lg:py-1'
                         onClick={() => handleRemoveFromCart(cartItem)}
                       >
                         Remove
