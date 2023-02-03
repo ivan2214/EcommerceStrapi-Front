@@ -32,11 +32,11 @@ const Slider = () => {
   ]
 
   return (
-    <section className='relative  min-h-[50vh] w-full overflow-hidden  '>
+    <section className='relative  overflow-hidden lg:min-h-[50vh] lg:w-full  '>
       <img
         style={{ opacity: opacity, transform: `translateX(${translate})` }}
         src={images[imgIndex]}
-        className='m-auto max-h-96 lg:aspect-auto   min-h-full min-w-full max-w-lg object-contain transition-all duration-500 ease-in-out aspect-[16/16]'
+        className='transition-all duration-500 ease-in-out   lg:m-auto lg:aspect-[16/16]  lg:max-h-96 lg:min-h-full lg:min-w-full lg:max-w-lg lg:object-contain'
         alt=''
       />
       <div className='absolute top-0   z-50 flex h-full w-full items-center justify-between '>

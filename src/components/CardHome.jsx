@@ -6,7 +6,7 @@ const CardHome = ({ name, logo }) => {
   
 
   return (
-    <article className='  w-56 max-w-xs rounded-lg px-10 shadow-md '>
+    <article className='flex  min-w-[150px] max-w-[150px] p-5 flex-col items-center gap-4 rounded-lg shadow-md lg:w-56  lg:max-w-xs lg:p-6'>
       <div className='flex  flex-col  items-center  justify-between '>
         <Link to={`/products/${name}`} className=' w-full'>
           <img
