@@ -30,6 +30,14 @@ export const router = createBrowserRouter([
         element: <Products />,
       },
       {
+        path: '/products/:name',
+        element: <Products />,
+      },
+      {
+        path: '/products/category/:cat',
+        element: <Products />,
+      },
+      {
         path: '/product/:id',
         element: <ProductDetail />,
       },

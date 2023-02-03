@@ -2,8 +2,11 @@ import { orderProducts } from '@/redux/slices/products/productsSlice'
 import { getAllProductsAsync, filterAsync } from '@/redux/slices/products/thunk'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
 
 const Filters = () => {
+  const { name, cat } = useParams()
+  console.log(name)
   const { categories } = useSelector((s) => s.categories)
   const { brands } = useSelector((s) => s.brands)
   const [order, setOrder] = useState('')
@@ -14,6 +17,22 @@ const Filters = () => {
     category: '',
   })
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (name)
+      setFilters({
+        ...filters,
+        brand: name,
+      })
+  }, [name])
+
+  useEffect(() => {
+    if (cat)
+      setFilters({
+        ...filters,
+        category: cat,
+      })
+  }, [cat])
 
   const handleChange = (e) => {
     if (e.name === 'order') setOrder(e.value)
