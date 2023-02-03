@@ -14,7 +14,7 @@ const NavBar = () => {
   const [query, setQuery] = useState('')
 
   const { cartTotalQuantity } = useSelector((s) => s.cart)
-  console.log(cartTotalQuantity)
+
   const handleSearch = (query) => {
     setQuery(query.value)
     dispatch(searchProductAsync(query.value))

@@ -3,8 +3,7 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 const CardHome = ({ name, logo }) => {
-  console.log(name)
-  console.log(logo)
+  
 
   return (
     <article className='  w-56 max-w-xs rounded-lg px-10 shadow-md '>

@@ -1,37 +1,3 @@
-/* import React from 'react'
-import CardProductCart from '@/components/CardProductCart'
-import { useSelector } from 'react-redux'
-
-const ProductsCart = () => {
-  const { cartItems } = useSelector((s) => s.cart)
-  console.log(cartItems)
-  return (
-    <section className='min-h-screen  w-full py-5'>
-      <section className='flex flex-col w-full justify-between gap-10'>
-
-
-        
-        {cartItems?.map((p) => {
-          return (
-            <CardProductCart
-              key={p.id}
-              title={p?.attributes?.title}
-              price={p?.attributes?.price}
-              quantity={p?.attributes?.quantity}
-              img={`http://localhost:1337${p.attributes.images.data[0].attributes.url}`}
-              id={p.id}
-              cartQuantity={p.cartQuantity}
-            />
-          )
-        })}
-      </section>
-    </section>
-  )
-}
-
-export default ProductsCart
- */
-
 import { formatAsARS } from '@/utils/formatNumber'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -44,6 +10,7 @@ import {
 } from '@/redux/slices/cart/cartSlice'
 
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 const Cart = () => {
   const cart = useSelector((state) => state.cart)
@@ -65,6 +32,16 @@ const Cart = () => {
   const handleClearCart = () => {
     dispatch(clearCart())
   }
+
+  const purchaseCart = async (cart) => {
+    console.log(cart)
+    const url = 'http://localhost:1337/api/payments'
+    const data = await axios.post(url, { cart })
+    const { body } = data?.data
+    console.log(body?.init_point)
+    window.open(body?.init_point)
+  }
+
   return (
     <div className=' flex flex-col gap-10 px-8 py-16'>
       <h2 className='text-center text-4xl  font-bold text-blue-400'>Carrito de Compras</h2>
@@ -157,13 +134,16 @@ const Cart = () => {
             <div className='flex max-w-full flex-col gap-3 p-5'>
               <div className='flex justify-between gap-5'>
                 <span className='text-2xl font-bold text-blue-400'>Total a pagar</span>
-                <span className='text-xl font-bold'>${cart.cartTotalAmount}</span>
+                <span className='text-xl font-bold'>{formatAsARS(cart.cartTotalAmount)}</span>
               </div>
 
               <p className='text-base font-light'>
                 Impuestos y gastos de envío calculados al finalizar la compra
               </p>
-              <button className='rounded-md bg-blue-400 px-8 py-2 text-white transition-all duration-300 ease-linear hover:bg-blue-700'>
+              <button
+                onClick={() => purchaseCart(cart)}
+                className='rounded-md bg-blue-400 px-8 py-2 text-white transition-all duration-300 ease-linear hover:bg-blue-700'
+              >
                 Comprar Ahora
               </button>
               <div className='flex text-gray-400'>

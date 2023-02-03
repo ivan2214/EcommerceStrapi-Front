@@ -7,7 +7,7 @@ const Marcas = () => {
   return (
     <section className='mx-auto flex h-full w-full max-w-6xl flex-col gap-10  py-5'>
       <h2 className='text-left text-3xl font-bold '>Las mejores marcas para vos</h2>
-      <section className='grid h-full w-full grid-cols-[repeat(auto-fit,minmax(250px,1fr))] place-items-center  gap-16 bg-gray-200  py-5'>
+      <section className='grid h-full w-full grid-cols-[repeat(auto-fit,minmax(250px,1fr))] place-items-center  gap-5   py-5'>
         {brands ? (
           brands.map(({ id, attributes }, i) => {
             return (
