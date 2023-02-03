@@ -48,23 +48,25 @@ const NavBar = () => {
             </button>
           )}
         </div>
-        {open && <NavMobile />}
       </div>
       <header
         id='navbar'
-        className={` ${open ? 'opacity-100' : 'opacity-50'} sticky top-0
-      left-0
-      right-0 z-50 mx-auto    hidden w-full   max-w-7xl flex-col gap-5 bg-white py-1 px-5  shadow-lg transition-all  duration-700 ease-linear lg:flex lg:flex-row lg:items-center lg:justify-between`}
+        className={` ${
+          !open ? 'h-0 -translate-x-[100%] bg-white' : 'h-[50vh] translate-x-[0%] bg-white'
+        } sticky top-0
+        left-0 right-0
+      z-50
+      mx-auto w-full max-w-7xl    flex-col    gap-5 bg-white py-1 px-5 shadow-lg transition-all  duration-700 ease-linear  lg:flex lg:h-max lg:translate-x-0 lg:flex-row lg:items-center lg:justify-between`}
       >
-        <Link to='/'>
+        <Link to='/' className=''>
           <img
-            className='max-h-12 w-full object-contain  transition-all  duration-500 ease-linear hover:origin-top hover:rotate-12 lg:max-h-[50px]'
+            className='max-h-12 w-full object-cover mb-5  transition-all  duration-500 ease-linear hover:origin-top hover:rotate-12 lg:max-h-[50px]'
             src={img}
             alt=''
           />
         </Link>
 
-        <form onSubmit={handleSubmit} className='flex items-center justify-center gap-5'>
+        <form onSubmit={handleSubmit} className='flex items-center justify-center gap-5 lg:mx-auto'>
           <input
             type='search'
             onChange={({ target }) => handleSearch(target)}
@@ -76,25 +78,28 @@ const NavBar = () => {
           <AiOutlineSearch className='cursor-pointer text-2xl transition-all duration-500 ease-linear hover:origin-top hover:rotate-12 hover:text-gray-500' />
         </form>
 
-        <nav>
-          <ul className='flex justify-between p-3 lg:flex-row lg:items-center lg:justify-center lg:gap-5'>
+        <nav className=''>
+          <ul className='flex flex-col items-center justify-between gap-12   lg:p-3 pt-5 lg:flex-row lg:items-center lg:justify-center lg:gap-5'>
             <Link to='/favorite'>
-              <li className='font-sans text-lg font-semibold'>
+              <li className='font-sans text-lg font-semibold flex flexr items-center gap-3'>
                 <MdOutlineFavoriteBorder className='text-2xl transition-all duration-500 ease-linear hover:origin-top hover:rotate-12 hover:text-gray-500' />
+                favoritos
               </li>
             </Link>
             <Link to='/products'>
-              <li className='font-sans text-lg font-semibold'>
+              <li className='font-sans text-lg font-semibold flex flexr items-center gap-3'>
                 <FaStoreAlt className='text-2xl transition-all duration-500 ease-linear hover:origin-top hover:rotate-12 hover:text-gray-500' />
+                Tienda
               </li>
             </Link>
             <Link to='/account'>
-              <li className='font-sans text-lg font-semibold'>
+              <li className='font-sans text-lg font-semibold flex flexr items-center gap-3'>
                 <AiOutlineUser className='text-2xl transition-all duration-500 ease-linear hover:origin-top hover:rotate-12 hover:text-gray-500' />
+                Cuenta
               </li>
             </Link>
             <Link to='/cart' className=''>
-              <li className=' relative select-none font-sans text-lg font-semibold'>
+              <li className=' relative select-none font-sans text-lg font-semibold flex items-center gap-3'>
                 <AiOutlineShoppingCart className='text-2xl transition-all duration-500 ease-linear hover:origin-top hover:rotate-12 hover:text-gray-500' />
                 <span className='absolute top-[-15px] right-[-7px] z-20  text-teal-300'>
                   {cartTotalQuantity}
