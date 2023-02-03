@@ -44,8 +44,10 @@ const Cart = () => {
   }
 
   return (
-    <div className=' overflow-hidden lg:flex lg:flex-col lg:gap-10 lg:px-8 lg:py-16'>
-      <h2 className='text-center text-4xl  font-bold text-blue-400'>Carrito de Compras</h2>
+    <div className=' overflow-hidden lg:flex lg:flex-col lg:gap-10 lg:px-8 lg:py-5'>
+      <h2 className='p-10 text-center text-4xl font-bold  text-blue-400 lg:p-0'>
+        Carrito de Compras
+      </h2>
       {cart.cartItems.length === 0 ? (
         <div className='p-5'>
           <p>Your cart is currently empty</p>
@@ -69,32 +71,40 @@ const Cart = () => {
           </div>
         </div>
       ) : (
-        <div className=' lg:flex lg:flex-col lg:gap-5'>
+        <div className=' gap-5 lg:flex lg:flex-col lg:gap-5'>
           <div className='flex w-full  items-center justify-between gap-x-2'>
-            <h3 className='text-lg font-bold  uppercase text-blue-400'>Productos</h3>
+            <h3 className='mb-5 px-4 text-lg font-bold uppercase  text-blue-400 lg:p-0'>
+              Productos
+            </h3>
           </div>
 
-          <div className='flex flex-col lg:flex lg:flex-col  lg:gap-10'>
+          <div className='flex flex-col gap-10 lg:flex lg:flex-col  '>
             {cart.cartItems &&
               cart.cartItems.map((cartItem) => (
+                /* container principal de la card */
                 <div
-                  className='flex flex-col border-b-2 border-gray-400 lg:flex lg:items-center lg:justify-between lg:py-5 '
+                  className='flex flex-col gap-10 border-b-2 border-gray-400 py-5 lg:flex lg:flex-row lg:items-center lg:justify-between lg:py-5 '
                   key={cartItem?.id}
                 >
-                  <div className='flex flex-col lg:flex-row'>
+                  {/* imagen y titulo */}
+                  <div className='flex flex-col gap-5 lg:flex-row'>
                     <img
                       className='
+                      m-auto
+                      max-h-[150px] w-full 
+                      object-contain
                       lg:m-auto lg:mr-5 lg:w-[100px] lg:max-w-full lg:object-cover'
                       /* src={`http://localhost:1337${cartItem?.attributes?.images.data[0].attributes.url}`} */
                       src={`https://ecommercestrapi-back-production.up.railway.app${cartItem?.attributes?.images?.data[0]?.attributes?.url}`}
                       alt={cartItem?.attributes?.title}
                     />
-                    <div className='flex flex-col lg:w-fit lg:flex-col lg:items-start  lg:gap-5'>
-                      <h3 className='lg:max-w-[200px] lg:text-base '>
+                    {/* titulo */}
+                    <div className='flex flex-col gap-10 lg:w-fit lg:flex-col lg:items-start  lg:gap-5'>
+                      <h3 className='max-w-xs px-5 lg:max-w-[200px] lg:text-base '>
                         {cartItem?.attributes?.title}
                       </h3>
                       <button
-                        className='bg-gray-200 lg:rounded-full lg:px-2 lg:py-1'
+                        className='w-full bg-red-500 py-2 text-white lg:rounded-full lg:px-2 lg:py-1'
                         onClick={() => handleRemoveFromCart(cartItem)}
                       >
                         Remove
@@ -126,8 +136,8 @@ const Cart = () => {
               ))}
           </div>
 
-          <div className='flex justify-between gap-10 bg-gray-100'>
-            <div className='p-5'>
+          <div className='flex p-10 flex-col-reverse lg:flex-row items-center lg:items-stretch justify-center gap-10  bg-gray-100 lg:p-4 lg:justify-between'>
+            <div className=' lg:p-5'>
               <button
                 className='w-full rounded-md bg-blue-400 py-2 px-8 text-white transition-all duration-300 ease-linear hover:bg-blue-700'
                 onClick={() => handleClearCart()}
@@ -135,7 +145,7 @@ const Cart = () => {
                 Vaciar Carrito
               </button>
             </div>
-            <div className='flex max-w-full flex-col gap-3 p-5'>
+            <div className='flex max-w-full flex-col gap-3  lg:p-5'>
               <div className='flex justify-between gap-5'>
                 <span className='text-2xl font-bold text-blue-400'>Total a pagar</span>
                 <span className='text-xl font-bold'>{formatAsARS(cart.cartTotalAmount)}</span>
@@ -153,7 +163,7 @@ const Cart = () => {
               <div className='flex text-gray-400'>
                 <Link
                   to='/'
-                  className='flex gap-5 text-gray-400 transition-all duration-300 ease-linear hover:text-gray-800'
+                  className='flex gap-5 text-gray-400 transition-all duration-300 ease-linear hover:text-gray-800 p-5 lg:p-0'
                 >
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
