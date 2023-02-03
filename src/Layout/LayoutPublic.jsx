@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux'
 import { getAllProductsAsync } from '@/redux/slices/products/thunk'
 import { useEffect } from 'react'
 import { getAllCategoriesAsync } from '@/redux/slices/categories/thunk'
+import { getAllBrandsAsync } from '@/redux/slices/brands/thunk'
 
 const LayoutPublic = () => {
   const dispatch = useDispatch()
@@ -11,6 +12,7 @@ const LayoutPublic = () => {
   useEffect(() => {
     dispatch(getAllProductsAsync())
     dispatch(getAllCategoriesAsync())
+    dispatch(getAllBrandsAsync())
   }, [dispatch])
   return (
     <div>

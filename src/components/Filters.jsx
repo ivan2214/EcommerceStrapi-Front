@@ -1,21 +1,37 @@
-import { orderPriceAsync, filterCategoryAsync } from '@/redux/slices/products/thunk'
-import React, { useState } from 'react'
+import { getAllProductsAsync, filterAsync } from '@/redux/slices/products/thunk'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 const Filters = () => {
   const { categories } = useSelector((s) => s.categories)
+  const { brands } = useSelector((s) => s.brands)
   const [order, setOrder] = useState('')
   const [brand, setBrand] = useState('')
   const [category, setCategory] = useState('')
+  const [filters, setFilters] = useState({
+    brand: '',
+    category: '',
+    order: '',
+  })
   const dispatch = useDispatch()
-  const handleOrder = (e) => {
-    dispatch(orderPriceAsync(e.value))
+
+  const handleChange = (e) => {
+    if (e.name === 'order') setOrder(e.value)
+    if (e.name === 'brand') setBrand(e.value)
+    if (e.name === 'category') setCategory(e.value)
+    setFilters({
+      ...filters,
+      [e.name]: e.value,
+    })
   }
-  const handleBrand = (e) => {
-    setBrand(e.value)
-  }
-  const handleCategory = (e) => {
-    dispatch(filterCategoryAsync(e.value))
+  /* console.log(filters) */
+
+  useEffect(() => {
+    if (filters.brand ||filters.category||filters.order ) return filter()
+  }, [filters])
+
+  const filter = () => {
+    dispatch(filterAsync(filters))
   }
 
   return (
@@ -24,12 +40,12 @@ const Filters = () => {
         <h2 className='text-2xl font-bold text-gray-900'>Ordenar por:</h2>
         <select
           value={order || 'orden'}
-          onChange={({ target }) => handleOrder(target)}
+          onChange={({ target }) => handleChange(target)}
           className='select-none rounded-md bg-blue-400 py-1 px-3 text-gray-100'
-          name=''
+          name='order'
           id=''
         >
-          <option value=''>Orden</option>
+          <option value='Orden'>Orden</option>
           <option value='desc'>mayor+</option>
           <option value='asc'>menor-</option>
         </select>
@@ -38,22 +54,28 @@ const Filters = () => {
         <h2 className='text-2xl font-bold text-gray-900'>Marca:</h2>
         <select
           value={brand || 'orden'}
-          onChange={({ target }) => handleBrand(target)}
+          onChange={({ target }) => handleChange(target)}
           className='select-none rounded-md bg-blue-400 py-1 px-3 text-gray-100'
-          name=''
+          name='brand'
           id=''
         >
           <option value='Marca'>Marca</option>
-          <option value='logitech'>logitech</option>
+          {brands.map((b) => {
+            return (
+              <option key={b.id} value={b?.attributes?.name}>
+                {b?.attributes?.name}
+              </option>
+            )
+          })}
         </select>
       </div>
       <div className='flex flex-col items-start gap-5'>
         <h2 className='text-2xl font-bold text-gray-900'>Categoria:</h2>
         <select
           value={category || 'orden'}
-          onChange={({ target }) => handleCategory(target)}
+          onChange={({ target }) => handleChange(target)}
           className='select-none rounded-md bg-blue-400 py-1 px-3 text-gray-100'
-          name=''
+          name='category'
           id=''
         >
           <option value='Categoria'>Categoria</option>

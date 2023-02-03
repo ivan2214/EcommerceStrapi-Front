@@ -24,7 +24,7 @@ const CardProduct = ({ title, description, price, image, id }) => {
       <div className='flex h-full flex-col  items-center  justify-between '>
         <Link to={`/product/${id}`} onClick={() => getDetail(id)} className=' w-full'>
           <img
-            className='h-[150px] max-h-[150px]  min-h-[100px] w-full rounded-md object-cover'
+            className='h-[150px] max-h-[150px]  min-h-[100px] w-full rounded-md object-contain'
             src={image}
             alt={description}
           />

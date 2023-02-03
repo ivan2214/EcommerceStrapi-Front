@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { getAllProducts, orderProducts, filterProducts,searchProduct } from './productsSlice'
+import { getAllProducts, filterProducts, searchProduct } from './productsSlice'
 
 export const getAllProductsAsync = () => async (dispatch) => {
   const url = 'http://localhost:1337/api'
@@ -9,7 +9,7 @@ export const getAllProductsAsync = () => async (dispatch) => {
   dispatch(getAllProducts(data))
 }
 
-export const orderPriceAsync = (order) => {
+/* export const orderPriceAsync = (order) => {
   console.log(order)
   return async function (dispatch) {
     const url = `http://localhost:1337/api/products?populate=*&sort=price:${order}`
@@ -29,6 +29,27 @@ export const filterCategoryAsync = (cat) => {
     return dispatch(filterProducts(data))
   }
 }
+export const filterBrandAsync = (brand) => {
+  return async function (dispatch) {
+    const url = `http://localhost:1337/api/products?filters[brand][name][$eq]=${brand}&populate=*`
+    const res = await axios.get(url)
+    const data = res.data.data
+    console.log(data)
+    return dispatch(filterProducts(data))
+  }
+} */
+
+export const filterAsync = (filters) => {
+  return async function (dispatch) {
+    console.log(filters);
+    const url = `http://localhost:1337/api/products?filters[categories][name][$contains]=${filters.category || ""}&filters[brand][name][$eq]=${filters.brand || ""}&sort=price:${filters.order || "asc"}&populate=*`
+    const res = await axios.get(url)
+    const data = res.data.data
+    console.log(data)
+    return dispatch(filterProducts(data))
+  }
+}
+
 export const searchProductAsync = (query) => {
   return async function (dispatch) {
     const url = `http://localhost:1337/api/products?filters[title][$contains]=${query}&populate=*`

@@ -11,9 +11,6 @@ export const productsSlice = createSlice({
     getAllProducts: (state, action) => {
       state.products = action.payload
     },
-    orderProducts: (state, action) => {
-      state.products = action.payload
-    },
     filterProducts: (state, action) => {
       state.products = action.payload
     },
@@ -24,6 +21,6 @@ export const productsSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { getAllProducts, orderProducts,filterProducts,searchProduct } = productsSlice.actions // para las action
+export const { getAllProducts, filterProducts, searchProduct } = productsSlice.actions // para las action
 
 export default productsSlice.reducer //para la store
