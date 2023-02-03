@@ -9,40 +9,19 @@ export const getAllProductsAsync = () => async (dispatch) => {
   dispatch(getAllProducts(data))
 }
 
-/* export const orderPriceAsync = (order) => {
-  console.log(order)
-  return async function (dispatch) {
-    const url = `http://localhost:1337/api/products?populate=*&sort=price:${order}`
-    const res = await axios.get(url)
-    const data = res.data.data
-    console.log(data)
-    return dispatch(orderProducts(data))
-  }
-}
-export const filterCategoryAsync = (cat) => {
-  console.log(cat)
-  return async function (dispatch) {
-    const url = `http://localhost:1337/api/products?filters[categories][name][$eq]=${cat}&populate=*`
-    const res = await axios.get(url)
-    const data = res.data.data
-    console.log(data)
-    return dispatch(filterProducts(data))
-  }
-}
-export const filterBrandAsync = (brand) => {
-  return async function (dispatch) {
-    const url = `http://localhost:1337/api/products?filters[brand][name][$eq]=${brand}&populate=*`
-    const res = await axios.get(url)
-    const data = res.data.data
-    console.log(data)
-    return dispatch(filterProducts(data))
-  }
-} */
-
 export const filterAsync = (filters) => {
   return async function (dispatch) {
-    console.log(filters);
-    const url = `http://localhost:1337/api/products?filters[categories][name][$contains]=${filters.category || ""}&filters[brand][name][$eq]=${filters.brand || ""}&sort=price:${filters.order || "asc"}&populate=*`
+    let url
+    if (filters.category && filters.brand) {
+      url = `http://localhost:1337/api/products?filters[categories][name][$contains]=${filters.category}&filters[brand][name][$eq]=${filters.brand}&populate=*`
+    }
+    if (filters.category && filters.brand == '') {
+      url = `http://localhost:1337/api/products?filters[categories][name][$contains]=${filters.category}&populate=*`
+    }
+    if (filters.category == '' && filters.brand) {
+      url = `http://localhost:1337/api/products?filters[brand][name][$eq]=${filters.brand}&populate=*`
+    }
+
     const res = await axios.get(url)
     const data = res.data.data
     console.log(data)
