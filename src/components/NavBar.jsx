@@ -30,11 +30,11 @@ const NavBar = () => {
     <header
       id='navbar'
       className={` $
-      sticky top-0 left-0 right-0 z-10 mx-auto   flex w-full max-w-7xl gap-5 bg-white py-1  px-5 shadow-lg  transition-all duration-700 ease-linear lg:flex-row lg:items-center lg:justify-between`}
+      sticky top-0 left-0 right-0 z-10 mx-auto flex   w-full max-w-7xl flex-col gap-5 bg-white py-1  px-5 shadow-lg  transition-all duration-700 ease-linear lg:flex-row lg:items-center lg:justify-between`}
     >
       <Link to='/'>
         <img
-          className='max-h-[50px]  w-full  transition-all duration-500 ease-linear hover:origin-top hover:rotate-12'
+          className='max-h-12 w-full object-contain  transition-all  duration-500 ease-linear hover:origin-top hover:rotate-12 lg:max-h-[50px]'
           src={img}
           alt=''
         />
@@ -53,7 +53,7 @@ const NavBar = () => {
       </form>
 
       <nav>
-        <ul className='flex lg:flex-row lg:items-center lg:justify-center lg:gap-5'>
+        <ul className='flex justify-between p-3 lg:flex-row lg:items-center lg:justify-center lg:gap-5'>
           <Link to='/favorite'>
             <li className='font-sans text-lg font-semibold'>
               <MdOutlineFavoriteBorder className='text-2xl transition-all duration-500 ease-linear hover:origin-top hover:rotate-12 hover:text-gray-500' />

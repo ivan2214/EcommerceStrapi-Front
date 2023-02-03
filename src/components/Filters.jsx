@@ -71,7 +71,7 @@ const Filters = () => {
   }
 
   return (
-    <section className='flex min-h-screen max-w-sm  flex-col gap-16 overflow-hidden bg-gray-300 p-5'>
+    <section className='flex flex-col gap-5 p-5 overflow-hidden bg-gray-300  lg:min-h-screen lg:max-w-sm lg:flex-col lg:gap-16 lg:p-5'>
       <div className='flex flex-col items-start gap-5'>
         <h2 className='text-2xl font-bold text-gray-900'>Ordenar por:</h2>
         <select

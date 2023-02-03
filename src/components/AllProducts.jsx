@@ -5,8 +5,8 @@ import CardProduct from './CardProduct'
 const AllProducts = () => {
   const { products } = useSelector((s) => s.products)
   return (
-    <section className='max-w-5 xl  mx-auto min-h-screen  py-5'>
-      <section className='grid h-full w-full grid-cols-3 gap-x-4 gap-y-16 overflow-hidden  bg-gray-100 px-5  shadow-sm'>
+    <section className='lg:max-w-5 xl  lg:mx-auto lg:min-h-screen  lg:py-5'>
+      <section className='grid h-full w-full  grid-cols-[repeat(auto-fit,minmax(360px,1fr))] gap-x-4 gap-y-16 overflow-hidden bg-gray-100  px-5 shadow-sm  lg:grid-cols-3'>
         {products.length ? (
           <>
             {products.map((p) => {

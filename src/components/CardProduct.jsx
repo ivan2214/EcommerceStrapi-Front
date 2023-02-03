@@ -20,7 +20,7 @@ const CardProduct = ({ title, description, price, image, id }) => {
   }
 
   return (
-    <article className='h-full min-h-[400px] w-96 max-w-xs rounded-md '>
+    <article className='h-full lg:max-w-xs rounded-md lg:min-h-[400px] lg:w-96 '>
       <div className='flex h-full flex-col  items-center  justify-between '>
         <Link to={`/product/${id}`} onClick={() => getDetail(id)} className=' w-full'>
           <img
