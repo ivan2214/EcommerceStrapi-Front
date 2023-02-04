@@ -71,13 +71,13 @@ const Filters = () => {
   }
 
   return (
-    <section className='flex flex-col gap-5 p-5 overflow-hidden bg-gray-300  lg:min-h-screen lg:max-w-sm lg:flex-col lg:gap-16 lg:p-5'>
+    <section className='flex flex-col gap-5 p-5 overflow-hidden   lg:min-h-screen lg:max-w-sm lg:flex-col lg:gap-16 lg:p-10'>
       <div className='flex flex-col items-start gap-5'>
-        <h2 className='text-2xl font-bold text-gray-900'>Ordenar por:</h2>
+        <h2 className='text-xl font-bold text-sky-500'>Ordenar por:</h2>
         <select
           value={order || 'order'}
           onChange={({ target }) => handleChangeOrder(target)}
-          className='select-none rounded-md bg-blue-400 py-1 px-3 text-gray-100'
+          className='select-none rounded-md bg-white py-1 px-3 text-gray-900 max-w-[150px]'
           id=''
         >
           <option value='order'>Orden</option>
@@ -86,11 +86,11 @@ const Filters = () => {
         </select>
       </div>
       <div className='flex flex-col items-start gap-5'>
-        <h2 className='text-2xl font-bold text-gray-900'>Marca:</h2>
+        <h2 className='text-xl font-bold text-sky-500'>Marca:</h2>
         <select
           value={filters.brand || 'brand'}
           onChange={({ target }) => handleChange(target)}
-          className='select-none rounded-md bg-blue-400 py-1 px-3 text-gray-100'
+          className='select-none rounded-md bg-white py-1 px-3 text-gray-900 max-w-[150px]'
           name='brand'
           id=''
         >
@@ -105,11 +105,11 @@ const Filters = () => {
         </select>
       </div>
       <div className='flex flex-col items-start gap-5'>
-        <h2 className='text-2xl font-bold text-gray-900'>Categoria:</h2>
+        <h2 className='text-xl font-bold text-sky-500'>Categoria:</h2>
         <select
           value={filters.category || 'category'}
           onChange={({ target }) => handleChange(target)}
-          className='select-none rounded-md bg-blue-400 py-1 px-3 text-gray-100'
+          className='select-none rounded-md bg-white py-1 px-3 text-gray-900 max-w-[150px]'
           name='category'
           id=''
         >

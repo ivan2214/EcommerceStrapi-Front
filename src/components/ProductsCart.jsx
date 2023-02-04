@@ -45,7 +45,7 @@ const Cart = () => {
 
   return (
     <div className=' overflow-hidden lg:flex lg:flex-col lg:gap-10 lg:px-8 lg:py-5'>
-      <h2 className='p-10 text-center text-4xl font-bold  text-blue-400 lg:p-0'>
+      <h2 className='p-10 text-center text-4xl font-bold  text-sky-500 lg:p-0'>
         Carrito de Compras
       </h2>
       {cart.cartItems.length === 0 ? (
@@ -73,7 +73,7 @@ const Cart = () => {
       ) : (
         <div className=' gap-5 lg:flex lg:flex-col lg:gap-5'>
           <div className='flex w-full  items-center justify-between gap-x-2'>
-            <h3 className='mb-5 px-4 text-lg font-bold uppercase  text-blue-400 lg:p-0'>
+            <h3 className='mb-5 px-4 text-lg font-bold uppercase  text-sky-500 lg:p-0'>
               Productos
             </h3>
           </div>

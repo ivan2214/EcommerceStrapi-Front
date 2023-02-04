@@ -31,7 +31,7 @@ const CardProduct = ({ title, description, price, image, id }) => {
         </Link>
         <div className='flex h-full w-full  flex-col items-center justify-between gap-10 rounded-md  p-5 shadow-lg'>
           <div className='flex  h-full w-full flex-col items-start justify-between gap-5'>
-            <h3 className='text-lg font-bold capitalize text-blue-600'>{title}</h3>
+            <h3 className='text-lg font-bold capitalize text-sky-500'>{title}</h3>
             <p className='py-5 text-left text-base font-light'>
               {description.length > 150 ? description.slice(0, 150) + '...' : description}
             </p>
@@ -40,13 +40,13 @@ const CardProduct = ({ title, description, price, image, id }) => {
           </div>
           <Link
             href=''
-            className='w-full rounded-full bg-blue-600 py-2 text-center text-xl font-bold text-gray-100'
+            className='w-full rounded-full bg-sky-500 py-2 text-center text-xl font-bold text-gray-100'
           >
             Comprar
           </Link>
           <button
             onClick={() => addCart(id)}
-            className='w-full rounded-full border border-blue-600 py-2 text-center text-xl font-bold text-blue-500'
+            className='w-full rounded-full border border-sky-500 py-2 text-center text-xl font-bold text-blue-500'
           >
             Agregar
           </button>
