@@ -14,7 +14,7 @@ const Filters = () => {
   const [category, setCategory] = useState('')
   const [filters, setFilters] = useState({
     brand: '',
-    category: '',
+    category: [],
   })
   const dispatch = useDispatch()
 
@@ -38,11 +38,13 @@ const Filters = () => {
     if (e.name === 'order') setOrder(e.value)
     if (e.name === 'brand') setBrand(e.value)
     if (e.name === 'category') setCategory(e.value)
+
     setFilters({
       ...filters,
-      [e.name]: e.value,
+      [e.name]: e.name == 'category' ? [...filters.category, e.value] : e.value,
     })
   }
+
   const handleChangeOrder = (e) => {
     setOrder(e.value)
   }
@@ -71,13 +73,13 @@ const Filters = () => {
   }
 
   return (
-    <section className='flex flex-col gap-5 p-5 overflow-hidden   lg:min-h-screen lg:max-w-sm lg:flex-col lg:gap-16 lg:p-10'>
+    <section className='flex flex-col gap-5 overflow-hidden p-5   lg:min-h-screen lg:max-w-sm lg:flex-col lg:gap-16 lg:p-10'>
       <div className='flex flex-col items-start gap-5'>
         <h2 className='text-xl font-bold text-sky-500'>Ordenar por:</h2>
         <select
           value={order || 'order'}
           onChange={({ target }) => handleChangeOrder(target)}
-          className='select-none rounded-md bg-white py-1 px-3 text-gray-900 max-w-[150px]'
+          className='max-w-[150px] select-none rounded-md bg-white py-1 px-3 text-gray-900'
           id=''
         >
           <option value='order'>Orden</option>
@@ -90,7 +92,7 @@ const Filters = () => {
         <select
           value={filters.brand || 'brand'}
           onChange={({ target }) => handleChange(target)}
-          className='select-none rounded-md bg-white py-1 px-3 text-gray-900 max-w-[150px]'
+          className='max-w-[150px] select-none rounded-md bg-white py-1 px-3 text-gray-900'
           name='brand'
           id=''
         >
@@ -106,22 +108,27 @@ const Filters = () => {
       </div>
       <div className='flex flex-col items-start gap-5'>
         <h2 className='text-xl font-bold text-sky-500'>Categoria:</h2>
-        <select
+        {/* <select
           value={filters.category || 'category'}
-          onChange={({ target }) => handleChange(target)}
-          className='select-none rounded-md bg-white py-1 px-3 text-gray-900 max-w-[150px]'
+          className='max-w-[150px] select-none rounded-md bg-white py-1 px-3 text-gray-900'
           name='category'
           id=''
-        >
-          <option value='category'>Categoria</option>
-          {categories.map((c) => {
-            return (
-              <option key={c.id} value={c?.attributes?.name}>
-                {c?.attributes?.name}
-              </option>
-            )
-          })}
-        </select>
+        ></select> */}
+        {categories.map((c) => {
+          return (
+            <div key={c.id} className='flex items-center gap-5'>
+              <input
+                onChange={({ target }) => handleChange(target)}
+                type='checkbox'
+                className='text-gray-800'
+                value={c?.attributes?.name}
+                id={c?.attributes?.name}
+                name='category'
+              />
+              <label htmlFor={c?.attributes?.name}>{c?.attributes?.name}</label>
+            </div>
+          )
+        })}
       </div>
     </section>
   )

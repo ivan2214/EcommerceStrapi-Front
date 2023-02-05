@@ -15,15 +15,31 @@ export const filterAsync = (filters) => {
     // production
     const baseUrl = 'https://ecommercestrapi-back-production.up.railway.app/api'
     /* const baseUrl = 'http://localhost:1337/api' */
-    let url
-    if (filters.category && filters.brand) {
-      url = `${baseUrl}/products?filters[categories][name][$contains]=${filters.category}&filters[brand][name][$eq]=${filters.brand}&populate=*`
+    let url = `${baseUrl}/products?`;
+    let categoryFilter = '';
+    let brandFilter = '';
+
+    if (filters.category && Array.isArray(filters.category) && filters.category.length > 0) {
+      filters.category.forEach((category, index) => {
+        categoryFilter += `filters[categories][name][$contains]=${category}`;
+        if (index < filters.category.length - 1) {
+          categoryFilter += '&';
+        }
+      });
     }
-    if (filters.category && filters.brand == '') {
-      url = `${baseUrl}/products?filters[categories][name][$contains]=${filters.category}&populate=*`
+
+    if (filters.brand && filters.brand !== '') {
+      brandFilter = `filters[brand][name][$eq]=${filters.brand}`;
     }
-    if (filters.category == '' && filters.brand) {
-      url = `${baseUrl}/products?filters[brand][name][$eq]=${filters.brand}&populate=*`
+
+    if (categoryFilter !== '' && brandFilter !== '') {
+      url += `${categoryFilter}&${brandFilter}&populate=*`;
+    } else if (categoryFilter !== '') {
+      url += `${categoryFilter}&populate=*`;
+    } else if (brandFilter !== '') {
+      url += `${brandFilter}&populate=*`;
+    } else {
+      url += `populate=*`;
     }
 
     const res = await axios.get(url)
@@ -32,6 +48,7 @@ export const filterAsync = (filters) => {
     return dispatch(filterProducts(data))
   }
 }
+
 
 export const searchProductAsync = (query) => {
   return async function (dispatch) {
