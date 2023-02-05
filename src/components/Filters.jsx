@@ -3,6 +3,7 @@ import { getAllProductsAsync, filterAsync } from '@/redux/slices/products/thunk'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
+import "./Filters.css"
 
 const Filters = () => {
   const { name, cat } = useParams()
@@ -49,6 +50,17 @@ const Filters = () => {
     setOrder(e.value)
   }
 
+  const clearFilters = () => {
+    dispatch(getAllProductsAsync())
+    setFilters({
+      brand: '',
+      category: [],
+    })
+    setOrder('')
+    setCategory('')
+    setBrand('')
+  }
+
   useEffect(() => {
     if (filters.brand || filters.category) {
       filter()
@@ -72,10 +84,24 @@ const Filters = () => {
     dispatch(filterAsync(filters))
   }
 
+  const condition = filters.brand !== '' || filters.category.length > 0 || order !== ''
+
   return (
     <section className='flex flex-col gap-5 overflow-hidden p-5   lg:min-h-screen lg:max-w-sm lg:flex-col lg:gap-16 lg:p-10'>
       <div className='flex flex-col items-start gap-5'>
         <h2 className='text-xl font-bold text-sky-500'>Ordenar por:</h2>
+        {condition ? (
+          <button
+            className={`animationButton rounded-full border  border-sky-400 py-1 px-4 text-gray-500 transition-all duration-500 
+
+             `}
+            onClick={clearFilters}
+          >
+            Borrar Filtros
+          </button>
+        ) : (
+          <></>
+        )}
         <select
           value={order || 'order'}
           onChange={({ target }) => handleChangeOrder(target)}
@@ -124,6 +150,7 @@ const Filters = () => {
                 value={c?.attributes?.name}
                 id={c?.attributes?.name}
                 name='category'
+                checked={filters.category.includes(c?.attributes?.name)}
               />
               <label htmlFor={c?.attributes?.name}>{c?.attributes?.name}</label>
             </div>
