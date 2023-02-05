@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import img from '@/assets/marca.jpg'
 import { Link } from 'react-router-dom'
 import { AiOutlineUser, AiOutlineShoppingCart, AiOutlineSearch } from 'react-icons/ai'
@@ -8,7 +8,6 @@ import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
 import { searchProductAsync } from '@/redux/slices/products/thunk'
 import { useNavigate } from 'react-router-dom'
-import NavMobile from './NavMobile'
 
 const NavBar = () => {
   const dispatch = useDispatch()
@@ -32,18 +31,20 @@ const NavBar = () => {
 
   return (
     <>
-      <div className='transition-all duration-500 ease-linear'>
+      <div
+        className='sticky top-0 left-0 right-0 z-50 bg-sky-500
+        text-white transition-all
+      duration-500 ease-linear'
+      >
         <div
-          className={`flex h-auto w-full items-start px-5 py-3 transition-all duration-500 ease-linear lg:hidden ${
-            open ? 'opacity-100' : 'opacity-50'
-          }`}
+          className={`flex h-auto w-full items-start bg-sky-500 px-5 py-3  transition-all duration-500 ease-linear lg:hidden `}
         >
           {!open ? (
-            <button className=' w-full' onClick={() => setOpen(!open)}>
+            <button className=' w-full text-white' onClick={() => setOpen(!open)}>
               <AiOutlineMenu size={30} />
             </button>
           ) : (
-            <button className=' w-full' onClick={() => setOpen(!open)}>
+            <button className=' w-full text-white' onClick={() => setOpen(!open)}>
               <AiOutlineClose size={30} />
             </button>
           )}
@@ -60,7 +61,7 @@ const NavBar = () => {
       >
         <Link to='/' className=''>
           <img
-            className='mb-5 max-h-12 w-full object-cover  transition-all  duration-500 ease-linear hover:origin-top hover:rotate-12 lg:max-h-[50px]'
+            className='mb-5 hidden max-h-12 w-full object-cover transition-all  duration-500  ease-linear hover:origin-top hover:rotate-12 lg:flex lg:max-h-[50px]'
             src={img}
             alt=''
           />
@@ -81,27 +82,27 @@ const NavBar = () => {
         <nav className=''>
           <ul className='flex flex-col items-center justify-between gap-12   pt-5 lg:flex-row lg:items-center lg:justify-center lg:gap-5 lg:p-3'>
             <Link to='/favorite'>
-              <li className='flexr transition-all duration-500 flex items-center gap-3 font-sans text-lg font-semibold text-white hover:text-gray-500'>
+              <li className='flexr flex items-center gap-3 font-sans text-lg font-semibold text-white transition-all duration-500 hover:text-gray-500'>
                 <MdOutlineFavoriteBorder className='text-2xl transition-all duration-500 ease-linear hover:origin-top hover:rotate-12 hover:text-gray-500' />
                 favoritos
               </li>
             </Link>
             <Link to='/products'>
-              <li className='flexr transition-all duration-500 flex items-center gap-3 font-sans text-lg font-semibold text-white hover:text-gray-500'>
+              <li className='flexr flex items-center gap-3 font-sans text-lg font-semibold text-white transition-all duration-500 hover:text-gray-500'>
                 <FaStoreAlt className='text-2xl transition-all duration-500 ease-linear hover:origin-top hover:rotate-12 hover:text-gray-500' />
                 Tienda
               </li>
             </Link>
             <Link to='/account'>
-              <li className='flexr transition-all duration-500 flex items-center gap-3 font-sans text-lg font-semibold text-white hover:text-gray-500'>
+              <li className='flexr flex items-center gap-3 font-sans text-lg font-semibold text-white transition-all duration-500 hover:text-gray-500'>
                 <AiOutlineUser className='text-2xl transition-all duration-500 ease-linear hover:origin-top hover:rotate-12 hover:text-gray-500' />
                 Cuenta
               </li>
             </Link>
             <Link to='/cart' className=''>
-              <li className='rela transition-all duration-500tive flex  select-none items-center gap-3 font-sans text-lg font-semibold text-white hover:text-gray-500'>
+              <li className='rela duration-500tive flex select-none  items-center gap-3 font-sans text-lg font-semibold text-white transition-all hover:text-gray-500'>
                 <AiOutlineShoppingCart className='text-2xl transition-all duration-500 ease-linear hover:origin-top hover:rotate-12 hover:text-gray-500' />
-                <span className='absolute top-[-15px] right-[-7px] z-20  text-teal-300'>
+                <span className='text-teal-300 lg:absolute lg:top-[-15px] lg:right-[-7px]  lg:z-20'>
                   {cartTotalQuantity}
                 </span>
               </li>
