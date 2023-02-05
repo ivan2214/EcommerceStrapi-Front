@@ -28,8 +28,13 @@ export const filterAsync = (filters) => {
       });
     }
 
-    if (filters.brand && filters.brand !== '') {
-      brandFilter = `filters[brand][name][$eq]=${filters.brand}`;
+    if (filters.brand && Array.isArray(filters.brand) && filters.brand.length > 0) {
+      filters.brand.forEach((brand, index) => {
+        brandFilter += `filters[brand][name][$eq]=${brand}`;
+        if (index < filters.brand.length - 1) {
+          brandFilter += '&';
+        }
+      });
     }
 
     if (categoryFilter !== '' && brandFilter !== '') {
@@ -48,6 +53,7 @@ export const filterAsync = (filters) => {
     return dispatch(filterProducts(data))
   }
 }
+
 
 
 export const searchProductAsync = (query) => {

@@ -3,18 +3,15 @@ import { getAllProductsAsync, filterAsync } from '@/redux/slices/products/thunk'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import "./Filters.css"
+import './Filters.css'
 
 const Filters = () => {
   const { name, cat } = useParams()
-
   const { categories } = useSelector((s) => s.categories)
   const { brands } = useSelector((s) => s.brands)
   const [order, setOrder] = useState('')
-  const [brand, setBrand] = useState('')
-  const [category, setCategory] = useState('')
   const [filters, setFilters] = useState({
-    brand: '',
+    brand: [],
     category: [],
   })
   const dispatch = useDispatch()
@@ -23,7 +20,7 @@ const Filters = () => {
     if (name)
       setFilters({
         ...filters,
-        brand: name,
+        brand: [...filters.brand, name],
       })
   }, [name])
 
@@ -31,19 +28,27 @@ const Filters = () => {
     if (cat)
       setFilters({
         ...filters,
-        category: cat,
+        category: [...filters.category, cat],
       })
   }, [cat])
 
   const handleChange = (e) => {
-    if (e.name === 'order') setOrder(e.value)
-    if (e.name === 'brand') setBrand(e.value)
-    if (e.name === 'category') setCategory(e.value)
+    if (e.target.name === 'order') setOrder(e.target?.value)
 
-    setFilters({
-      ...filters,
-      [e.name]: e.name == 'category' ? [...filters.category, e.value] : e.value,
-    })
+    if (e.target.checked) {
+      setFilters({
+        ...filters,
+        [e.target.name]:
+          e.target.name == 'category'
+            ? [...filters.category, e.target?.value]
+            : [...filters.brand, e.target?.value],
+      })
+    } else {
+      setFilters({
+        brand: filters.brand.filter((b) => b !== e.target.value),
+        category: filters.category.filter((c) => c !== e.target.value),
+      })
+    }
   }
 
   const handleChangeOrder = (e) => {
@@ -53,16 +58,14 @@ const Filters = () => {
   const clearFilters = () => {
     dispatch(getAllProductsAsync())
     setFilters({
-      brand: '',
+      brand: [],
       category: [],
     })
     setOrder('')
-    setCategory('')
-    setBrand('')
   }
 
   useEffect(() => {
-    if (filters.brand || filters.category) {
+    if (filters.brand.length > 0 || filters.category.length > 0) {
       filter()
     }
   }, [filters])
@@ -72,11 +75,10 @@ const Filters = () => {
   }, [order])
 
   useEffect(() => {
-    if (order === 'order' || filters.brand == 'brand' || filters.category === 'category')
-      dispatch(getAllProductsAsync())
-    if (order === 'order' || filters.brand == 'brand' || filters.category === 'category') {
-      setFilters({ brand: '', category: '' })
-      setOrder('orden')
+    if (order === 'order') dispatch(getAllProductsAsync())
+    if (order === 'order') {
+      setFilters({ brand: [], category: [] })
+      setOrder('')
     }
   }, [order, filters])
 
@@ -84,10 +86,10 @@ const Filters = () => {
     dispatch(filterAsync(filters))
   }
 
-  const condition = filters.brand !== '' || filters.category.length > 0 || order !== ''
+  const condition = filters.brand.length > 0 || filters.category.length > 0 || order !== ''
 
   return (
-    <section className='flex flex-col gap-5 overflow-hidden p-5   lg:min-h-screen lg:max-w-sm lg:flex-col lg:gap-16 lg:p-10'>
+    <section className='flex flex-col gap-5 overflow-hidden p-5 md:w-full md:flex-row md:justify-between   lg:min-h-screen lg:max-w-sm lg:flex-col lg:gap-16 lg:p-10'>
       <div className='flex flex-col items-start gap-5'>
         <h2 className='text-xl font-bold text-sky-500'>Ordenar por:</h2>
         {condition ? (
@@ -115,22 +117,23 @@ const Filters = () => {
       </div>
       <div className='flex flex-col items-start gap-5'>
         <h2 className='text-xl font-bold text-sky-500'>Marca:</h2>
-        <select
-          value={filters.brand || 'brand'}
-          onChange={({ target }) => handleChange(target)}
-          className='max-w-[150px] select-none rounded-md bg-white py-1 px-3 text-gray-900'
-          name='brand'
-          id=''
-        >
-          <option value='brand'>Marca</option>
-          {brands.map((b) => {
-            return (
-              <option key={b.id} value={b?.attributes?.name}>
-                {b?.attributes?.name}
-              </option>
-            )
-          })}
-        </select>
+
+        {brands.map((b) => {
+          return (
+            <div key={b.id} className='flex items-center gap-5'>
+              <input
+                onChange={(e) => handleChange(e)}
+                type='checkbox'
+                className='text-gray-800'
+                value={b?.attributes?.name}
+                id={b?.attributes?.name}
+                name='brand'
+                checked={filters?.brand.includes(b?.attributes?.name)}
+              />
+              <label htmlFor={b?.attributes?.name}>{b?.attributes?.name}</label>
+            </div>
+          )
+        })}
       </div>
       <div className='flex flex-col items-start gap-5'>
         <h2 className='text-xl font-bold text-sky-500'>Categoria:</h2>
@@ -150,7 +153,7 @@ const Filters = () => {
                 value={c?.attributes?.name}
                 id={c?.attributes?.name}
                 name='category'
-                checked={filters.category.includes(c?.attributes?.name)}
+                checked={filters?.category.includes(c?.attributes?.name)}
               />
               <label htmlFor={c?.attributes?.name}>{c?.attributes?.name}</label>
             </div>
